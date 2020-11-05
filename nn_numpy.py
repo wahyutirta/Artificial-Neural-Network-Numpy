@@ -23,9 +23,9 @@ dense2 = Layer_Dense(64, 3)
 loss_activation = Activation_Softmax_Loss_CategoricalCrossentropy()
 
 # Create optimizer, choose one
-optimizer = Optimizer_Adam(learning_rate=0.05, decay=5e-7)
+#optimizer = Optimizer_Adam(learning_rate=0.05, decay=5e-7)
 #optimizer = Optimizer_RMSprop(learning_rate=0.02, decay=1e-5, rho=0.999)
-#ptimizer = Optimizer_SGD(decay=8e-8, momentum=0.9)
+optimizer = Optimizer_SGD(decay=8e-8, momentum=0.9)
 #optimizer = Optimizer_Adagrad(decay=1e-4)
 
 

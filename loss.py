@@ -56,7 +56,18 @@ class Loss_CategoricalCrossentropy(Loss):
         # sample 3 expected to be cat
         if len(y_true.shape) == 1:
             correct_confidences = y_pred_clipped[range(samples),y_true]
-            # this code works as well as this one            
+            # array slicing 
+            # softmax_outputs is a numpy array and you can index it like plain Python lists 
+            # softmax_outputs[5:10] or multi-dimensional NumPy arrays 
+            # softmax_outputs[5:10, 2:3]
+            # where comma separates dimensions. The same is a case here but instead of fixed values, 
+            # or ranges (like 5:10) we're using a variable containing a list both 
+            # this range(len()) expression and class_targets are lists. 
+            # and it might look like class_targets[[5,6,7,8,9,10],[2,3]]
+            # take range(samples) number of row
+            # the value of each row come from index is pointed by y_pred
+            
+            # using loop            
             # for targ_indx, distribution in zip(class_targets, softmax_outputs):
                 # samples = len(softmax)
                 # softmax = [[0.7, 0.1, 0.2], distribution 0
@@ -65,6 +76,14 @@ class Loss_CategoricalCrossentropy(Loss):
                 # class_targets or y_true = np.array([0, 1, 1])
                 # print(distribution[targ_idx])
                 # [0.7, 0.1, 0.2] -> [0] =  0.7 and so on
+            # array slicing 
+            # softmax_outputs is a numpy array and you can index it like plain Python lists 
+            # softmax_outputs[5:10] or multi-dimensional NumPy arrays 
+            # softmax_outputs[5:10, 2:3]
+            # where comma separates dimensions. The same is a case here but instead of fixed values, 
+            # or ranges (like 5:10) we're using a variable containing a list both 
+            # this range(len()) expression and class_targets are lists. 
+            # and it might look like class_targets[[5,6,7,8,9,10],[2,3]]
             
         # Mask values - only for one-hot encoded labels
         # one hot label e.g.
@@ -102,7 +121,8 @@ class Loss_CategoricalCrossentropy(Loss):
 
         # If labels are sparse, turn them into one-hot vector
         if len(y_true.shape) == 1:
-            y_true = np.eye(labels)[y_true]
+            y_true = np.eye(labels)[y_true] 
+            #
 
         # Calculate gradient
         self.dinputs = -y_true / dvalues

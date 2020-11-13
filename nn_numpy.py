@@ -7,22 +7,26 @@ from loss import *
 from Optimizer import *
 from data import *
 
+import matplotlib.pyplot as plt
+
 # Create dataset
 X, y = spiral.create_data(samples=100, classes=3)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap='brg') 
+plt.show()
 
 # Create Dense layer with 2 input features and 64 output values
-dense1 = Layer_Dense(2, 64)
+dense1 = Layer_Dense(2, 2)
 
 # Create ReLU activation (to be used with Dense layer):
 activation1 = Activation_ReLu()
 
-dense2 = Layer_Dense(64, 12)
+dense2 = Layer_Dense(2, 2)
 activation2 = Activation_ReLu()
 
 
 # Create second Dense layer with 64 input features (as we take output
 # of previous layer here) and 3 output values (output values)
-dense3 = Layer_Dense(12, 3)
+dense3 = Layer_Dense(2, 3)
 # Create Softmax classifier's combined loss and activation
 loss_activation = Activation_Softmax_Loss_CategoricalCrossentropy()
 
@@ -34,7 +38,7 @@ optimizer = Optimizer_Adam(learning_rate=0.05, decay=5e-7)
 
 
 # Train in loop
-for epoch in range(10001):
+for epoch in range(1):
 
     # Perform a forward pass of our training data through this layer
     dense1.forward(X)
@@ -60,6 +64,7 @@ for epoch in range(10001):
     predictions = np.argmax(loss_activation.output, axis=1)
     if len(y.shape) == 2:
         y = np.argmax(y, axis=1)
+        # np.argmax return indexs of max value each row (axis 1)
         # np.argmax return array of index refering to position of maximun value along axis 1
     accuracy = np.mean(predictions==y)
     

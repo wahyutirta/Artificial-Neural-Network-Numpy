@@ -38,8 +38,7 @@ class Activation_Softmax:
         # Normalize them for each sample
         # turn this :  [121.51041751893969, 3.3534846525504487, 10.85906266492961]
         # to this : [0.89528266 0.02470831 0.08000903] --> sum = 1
-        probabilities = exp_values / np.sum(exp_values, axis=1,
-                                            keepdims=True)
+        probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
         self.output = probabilities
 
     # Backward pass
@@ -59,6 +58,5 @@ class Activation_Softmax:
 
             # Calculate sample-wise gradient
             # and add it to the array of sample gradients
-            self.dinputs[index] = np.dot(jacobian_matrix,
-                                         single_dvalues)
+            self.dinputs[index] = np.dot(jacobian_matrix,single_dvalues)
 

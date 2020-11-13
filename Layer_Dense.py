@@ -30,7 +30,28 @@ class Layer_Dense:
     # Backward pass
     def backward(self, dvalues):
         # Gradients on parameters
+        # Calculating the gradients with respect to weights 
+        # in this case, we’re going to be using gradients to update the weights, 
+        # so we need to match the shape of weights, not inputs. 
+        # Since the derivative with respect to the weights equals inputs, 
+        # weights are transposed, 
+        # so we need to transpose inputs to receive the derivative of the neuron with respect to weights.
+        # drelu_dw0 = drelu_dxw0 * dmul_dw0
         self.dweights = np.dot(self.inputs.T, dvalues)
+        # to get derivative of weight each neuron - 
+        # we need to multiply input with dvalue(derivative of next layer or activation layer)
+        # given input, weight, activation output
+        # input  [[-0.,  0.],   weight [[0., 0.], to activation [[0., 0.,]
+          #       [-0., -0.],           [0., 0.]]         output [0., 0.,]
+          #       [ 0.,  0.]]                                    [0., 0.,]]
+        # to get derivative
+        # input  [[-0.,  0.],  to activation [[0., 0.],
+          #       [-0., -0.],                 [0., 0.],
+          #       [ 0.,  0.]]          output [0., 0.,]
+        # so we need to tranpose the inputs matrix
         self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
+        
         # Gradient on values
         self.dinputs = np.dot(dvalues, self.weights.T)
+        # this is the order
+        # drelu_dx0 = drelu_dz * dsum_dxw0 * w[0] --> dmul_dx0 = w[0]

@@ -55,6 +55,8 @@ class Loss_CategoricalCrossentropy(Loss):
         # sample 2 expected to be cat
         # sample 3 expected to be cat
         if len(y_true.shape) == 1:
+            #print( y_true.shape, y_pred_clipped.shape)
+            
             correct_confidences = y_pred_clipped[range(samples),y_true]
             # array slicing 
             # softmax_outputs is a numpy array and you can index it like plain Python lists 

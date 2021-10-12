@@ -9,24 +9,26 @@ from data import *
 
 import matplotlib.pyplot as plt
 
+
+
 # Create dataset
-X, y = spiral.create_data(samples=100, classes=3)
+X, y = vertical.create_data(samples=10, classes=3)
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap='brg') 
 plt.show()
 
 # Create Dense layer with 2 input features and 64 output values
-dense1 = Layer_Dense(2, 2)
+dense1 = Layer_Dense(2, 10)
 
 # Create ReLU activation (to be used with Dense layer):
 activation1 = Activation_ReLu()
 
-dense2 = Layer_Dense(2, 2)
+dense2 = Layer_Dense(10, 10)
 activation2 = Activation_ReLu()
 
 
 # Create second Dense layer with 64 input features (as we take output
 # of previous layer here) and 3 output values (output values)
-dense3 = Layer_Dense(2, 3)
+dense3 = Layer_Dense(10, 3)
 # Create Softmax classifier's combined loss and activation
 loss_activation = Activation_Softmax_Loss_CategoricalCrossentropy()
 
@@ -37,8 +39,9 @@ optimizer = Optimizer_Adam(learning_rate=0.05, decay=5e-7)
 #optimizer = Optimizer_Adagrad(decay=1e-4)
 
 
+
 # Train in loop
-for epoch in range(1):
+for epoch in range(100):
 
     # Perform a forward pass of our training data through this layer
     dense1.forward(X)
@@ -72,7 +75,7 @@ for epoch in range(1):
     # true -> false
     # false -> true
     # mod 100 = 0 -> false, if not -> true
-    if not epoch % 100:
+    if not epoch % 10:
         print(f'epoch: {epoch}, ' +
               f'acc: {accuracy:.3f}, ' +
               f'loss: {loss:.3f}, ' +

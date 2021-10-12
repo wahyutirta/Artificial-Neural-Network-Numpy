@@ -4,6 +4,7 @@ this framework also included 4 optimization algorithm. run MLP_main.py to run ML
 
 layer files are activation_relu.py, activation_softmax.py, layer_dense.py, and loss.py
 optimizer object classes are in optimizer.py file
+other files are experimental files so feel free to try write your own model!
 
 # 🖥️ 4 works optimizer
 - SGD
